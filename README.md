@@ -50,10 +50,10 @@ Sur votre serveur DNS mettre a jour le système et installer le package **Bind9*
 ![2_named conf options](https://github.com/user-attachments/assets/663b2eab-9110-4627-8593-4f23a5a52e97)
 
 #### Modification du fichier "*/etc/bind/named.conf.local*"
-- Zone `wilders.lan`  
+- Zone directe `wilders.lan`  
 - Zone inverse `0.0.10.in-addr.arpa`  
 - Type `master`  
-- Fichier `/etc/bind/forward.wilders.lan`  
+- Fichier directe `/etc/bind/forward.wilders.lan`  
 - Fichier inverse `/etc/bind/reverse.wilders.lan`  
 - Autorisation de mise à jour `none`
 > A ce stade les fichiers de configurations "*forward.wilders.lan*" et "*reverse.wilders.lan*" n'existent pas encore.  
@@ -83,6 +83,18 @@ Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"
 
 ![6_named](https://github.com/user-attachments/assets/948e4e9a-a05b-47a3-8656-f1f2c9578ab3)
 
+### Lancement du service "*named*"
+- `sudo systemctl start named`
+- `sudo systemctl enable named`
+- `sudo systemctl status named`
+
+![10_systemctl_status_named](https://github.com/user-attachments/assets/08de342d-4b84-40b6-9742-77749c8df673)
+
+### Débogage
+- Vérification de la syntaxe du fichier "*named.conf.local*" avec `named-checkconf`
+- Vérification de la syntaxe des fichiers "*forward*" et "*reverse*" avec `named-checkzone`
+- Ouverture du port 53 si parefeu actif `sudo ufw allow 53`
+
 ### Quelques tests depuis la machine client
 - `dig primary.wilders.lan`  
 ![7_dig_primary wilders lan](https://github.com/user-attachments/assets/caf4ba41-6ab4-455a-844a-933139197d4d)
@@ -92,16 +104,6 @@ Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"
 
 - `nslookup www.wilders.lan`   
 ![9_nslookup_www wilders lan](https://github.com/user-attachments/assets/3a9d842c-f46f-4669-9f73-3ec14f535395)
-
-
-
-
-
-
-
-
-
-
 
 
 Plus d'infos : https://bind9.readthedocs.io/en/v9.18.31/index.html
