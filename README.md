@@ -1,4 +1,4 @@
-## Labo DNS avec Bind9
+## :trident: Labo DNS sous Bind9
 
 ### :one: Dans ce tuto nous allons mettre en place un labo composé de :  
 - un serveur DNS sous **Debian 12**  
