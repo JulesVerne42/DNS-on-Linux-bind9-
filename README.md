@@ -13,7 +13,8 @@
 - Etat de la carte réseau `static`  
 - Adresse IP du serveur DNS `10.0.0.5`  
 - Adresse IP de la passerelle `10.0.0.1`  
-- CIDR `/24`  
+- CIDR `/24`
+
 ![1_interfaces](https://github.com/user-attachments/assets/394ed49c-1d95-441e-8faa-8aa1acb4d77d)
 
 #### Client sous Debian 12
@@ -22,12 +23,14 @@
 - Etat de la carte réseau `static`  
 - Adresse IP du client `10.0.0.20`  
 - Adresse IP de la passerelle `10.0.0.1`  
-- CIDR `/24`  
+- CIDR `/24`
+
 ![1 1_interfaces](https://github.com/user-attachments/assets/63eed0df-0131-4896-bdf8-5976c81997fa)
 
 ##### Modification du fichier "*resolv.conf*"
 - Domaine de recherche `wilders.lan`  
-- Adresse IP du DNS `10.0.0.5`  
+- Adresse IP du DNS `10.0.0.5`
+
 ![1 2_resolv conf](https://github.com/user-attachments/assets/44700d32-d211-493e-a337-53966d2cc2d5)
 
 ### Installation du package DNS
@@ -35,16 +38,50 @@ Sur votre serveur DNS mettre a jour le système et installer le package **Bind9*
 - `sudo apt update && sudo apt upgrade`  
 - `sudo apt install bind9 bind9-doc`  
 
-### Editions des fichiers de configurations présent dans "*/etc/bind*"
-:warning: Attention à la syntaxe, les fichiers de configs sont sensibles !!  
-#### Modification du fichier "*named.conf.options*"
+### Editions des fichiers de configurations
+:warning: Attention à la syntaxe, les fichiers de configs sont sensibles :warning:  
+#### Modification du fichier "*/etc/bind/named.conf.options*"
 - Réseau `10.0.0.0/24`
-- Autorisation de requête DNS `localhost; internal-network;`  
-- Autorisation de transfert DNS `localhost;`  
-- Redirection DNS `8.8.8.8;`  
-- Autorisation de requête récursive `yes;`  
+- Autorisation de requête DNS `localhost` ; `internal-network`  
+- Autorisation de transfert DNS `localhost`  
+- Redirection DNS `8.8.8.8`  
+- Autorisation de requête récursive `yes`
+
 ![2_named conf options](https://github.com/user-attachments/assets/663b2eab-9110-4627-8593-4f23a5a52e97)
 
+#### Modification du fichier "*/etc/bind/named.conf.local*"
+- Zone `wilders.lan`  
+- Zone inverse `0.0.10.in-addr.arpa`  
+- Type `master`  
+- Fichier `/etc/bind/forward.wilders.lan`  
+- Fichier inverse `/etc/bind/reverse.wilders.lan`  
+- Autorisation de mise à jour `none`
+> A ce stade les fichiers de configurations "*forward.wilders.lan*" et "*reverse.wilders.lan*" n'existent pas encore.  
+
+![3_named conf local](https://github.com/user-attachments/assets/48e11add-6ab9-488e-bd40-e96031fcda87)
+
+#### Création du fichier "*forward.wilders.lan*"
+Tout d'abord il faut copier le fichier "*db.local*" vers "*forward.wilders.lan*"  
+- `cp /etc/bind/db.local /etc/bind/forward.wilders.lan`  
+- Déclaration des informations serveur DNS `primary.wilders.lan` ; `10.0.0.5`  
+- Enregistrement "A" de `www` en `10.0.0.20`  
+- Enregistrement "CNAME" du sous-domaine `www.wilders.lan`  
+
+![4_forward wilders lan](https://github.com/user-attachments/assets/fd766c58-df93-4926-a2b5-bdf62f632b5c)
+
+#### Création du fichier "*reverse.wilders.lan*"
+Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"  
+- `cp /etc/bind/db.127 /etc/bind/reverse.wilders.lan`  
+- Déclaration des informations serveur DNS `primary.wilders.lan` ; `10.0.0.5`  
+- Enregistrement inverse `5` du sous-domaine `primary.wilders.lan`  
+- Enregistrement inverse `20` du sous-domaine `www.wilders.lan`
+
+![5_reverse wilders lan](https://github.com/user-attachments/assets/2289a0ba-1bd4-431c-8c86-26267527fa82)
+
+#### Modification du fichier "*/etc/default/named*"
+- Options `-4`  
+
+![6_named](https://github.com/user-attachments/assets/948e4e9a-a05b-47a3-8656-f1f2c9578ab3)
 
 
 
@@ -63,7 +100,4 @@ Sur votre serveur DNS mettre a jour le système et installer le package **Bind9*
 
 
 
-
-
-
-Plus d'infos sur la documentation officielle : https://bind9.readthedocs.io/en/v9.18.31/index.html
+Plus d'infos : https://bind9.readthedocs.io/en/v9.18.31/index.html
