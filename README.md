@@ -91,10 +91,11 @@ Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"
 ![10_systemctl_status_named](https://github.com/user-attachments/assets/08de342d-4b84-40b6-9742-77749c8df673)
 
 ### :hammer: Débogage
+:sos: Contrôler vos logs à tout moment pour poser un diagnostique `journalctl`  
 - Ping depuis serveur vers client `ping`
 - Vérification de la syntaxe du fichier "*named.conf.local*" avec `named-checkconf`
 - Vérification de la syntaxe des fichiers "*forward*" et "*reverse*" avec `named-checkzone`
-- Ouverture du port 53 si parefeu actif `sudo ufw allow 53`
+- Ouverture du port 53 si parefeu actif `sudo ufw allow 53`  
 
 ### :negative_squared_cross_mark: Quelques tests depuis la machine client
 - `dig primary.wilders.lan`  
@@ -107,4 +108,4 @@ Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"
 ![9_nslookup_www wilders lan](https://github.com/user-attachments/assets/3a9d842c-f46f-4669-9f73-3ec14f535395)
 
 
-Plus d'infos : https://bind9.readthedocs.io/en/v9.18.31/index.html
+:information_source: Plus d'infos : https://bind9.readthedocs.io/en/v9.18.31/index.html
