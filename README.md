@@ -43,9 +43,27 @@ Sur votre serveur DNS mettre a jour le système et installer le package **Bind9*
 - Autorisation de transfert DNS `localhost;`  
 - Redirection DNS `8.8.8.8;`  
 - Autorisation de requête récursive `yes;`  
+![2_named conf options](https://github.com/user-attachments/assets/663b2eab-9110-4627-8593-4f23a5a52e97)
 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Plus d'infos sur la documentation officielle : https://bind9.readthedocs.io/en/v9.18.31/index.html
