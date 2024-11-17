@@ -35,6 +35,14 @@ Sur votre serveur DNS mettre a jour le système et installer le package **Bind9*
 - `sudo apt update && sudo apt upgrade`  
 - `sudo apt install bind9 bind9-doc`  
 
+### Editions des fichiers de configurations présent dans "*/etc/bind*"
+:warning: Attention à la syntaxe, les fichiers de configs sont sensibles !!  
+#### Modification du fichier "*named.conf.options*"
+- Réseau `10.0.0.0/24`
+- Autorisation de requête DNS `localhost; internal-network;`  
+- Autorisation de transfert DNS `localhost;`  
+- Redirection DNS `8.8.8.8;`  
+- Autorisation de requête récursive `yes;`  
 
 
 
