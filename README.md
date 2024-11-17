@@ -83,11 +83,15 @@ Tout d'abord il faut copier le fichier "*db.127*" vers "*reverse.wilders.lan*"
 
 ![6_named](https://github.com/user-attachments/assets/948e4e9a-a05b-47a3-8656-f1f2c9578ab3)
 
+### Quelques tests depuis la machine client
+- `dig primary.wilders.lan`  
+![7_dig_primary wilders lan](https://github.com/user-attachments/assets/caf4ba41-6ab4-455a-844a-933139197d4d)
 
+- `dig -x 10.0.0.5`  
+![8_dig-x_10 0 0 5](https://github.com/user-attachments/assets/4f660e41-0b64-4f9e-b471-89b78d9f5159)
 
-
-
-
+- `nslookup www.wilders.lan`   
+![9_nslookup_www wilders lan](https://github.com/user-attachments/assets/3a9d842c-f46f-4669-9f73-3ec14f535395)
 
 
 
